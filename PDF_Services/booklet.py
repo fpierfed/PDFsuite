@@ -140,7 +140,7 @@ def main(argv):
     totalPages = len(UnsortedOrder)
 
     if hasSignatures:
-        signatureSize = pagesPerSheet
+        signatureSize = pagesPerSheet * 4           # 2 pages front and back
     else:
         signatureSize = totalPages
 
