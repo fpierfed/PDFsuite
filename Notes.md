@@ -1,18 +1,23 @@
 # PDFSuite Notes #
 
-PDF Suite was last updated January 2019. If you have downloaded before then, please update.
+## Python on the Mac ##
+Apple has announced that Catalina will be the last version of MacOS to ship with python 2.7. Furthermore, python 2 will be 'end-of-lifed' in 2020. This means that in MacOS 10.16 (to be released in September 2020), the user will have to install python3 and PyObjC to use the scripts. I plan to update the scripts to use python 3 and the latest version of PyObjC before then, rather than the versions that have shipped with MacOS before that date. The alternative might be to rewrite using Swift *(Hmmm)* or AppleScript-ObjC *(Eurghhh)*, in order to maintain the ease-of-use without dependencies.  
+However, I enjoy writing with python, so will certainly continue using them myself!
 
+Anyone wishing to use these scripts on python3: most should work if you remove all the utf-8 encode-decode functions, and make sure that print has brackets round everything.
+
+## Future plans ##
 Future plans for these scripts, which are also an indication of their current limitations, include (in no particular order):
 
 1. When processing multiple files with scripts that create one new file for each input, _(e.g. Watermark, page numbers, etc)_, it might be beneficial to collate the output files into one folder. Otherwise, you get your input and output files all mixed up together. I find that I often want to select and further process the created files.)
 
 2. It is assumed that all PDFs are not encrypted. Future versions should check for encryption and ask for passwords or exit gracefully. (A demonstration script that checks for encryption, ask for a password, unlocks the data and reports on its success is included here as password.py.)
 
-3. The abilities of these scripts will be merged with CUPS backends, to create virtual printers that can automatically perform actions on PDFs as part of a print queue.
+3. The abilities of these scripts will be merged with CUPS backends, to create virtual printers that can automatically perform actions on PDFs as part of a print queue. (though CUPS backends are being phased out.)
 
-4. The scripts should be a bit more python-y, and be more readily 'pluggable' into larger projects.
+4. The scripts should be a bit more python-y, and be more readily 'pluggable' into larger projects. 
  
-5. If there's something you want these scripts to do, or something they're not doing that you think they should, please let me know.
+5. If there's something you want these scripts to do, or something they're not doing that you think they should, please let me know. If anyone wants to help with improving the scripts in these ways, please jump in!
 
 ## Limitations ##
 
@@ -24,8 +29,3 @@ It is therefore worth mentioning that because many of the utilities in _PDFsuite
 
 ***I use these scripts on a daily basis, as part of a print workflow!*** I needed to find an alternative to Acrobat for creating PDFs from images, combining PDF files generated from apps and producing booklet spreads for printing. It was this need that led me to create these scripts.
 
-
-## Python on the Mac ##
-These scripts are designed to work with the PyObjC Cocoa bridge and Python version currently bundled with MacOS. There are newer versions of python and PyObjC available, but the portability of the vanilla experience is preferred. 
-
-If you're interested in python scripts, there are some python scripts written by Apple, in _/System/Library/Automator_, inside the bundles of PDF Automator actions for Combining PDF Pages, Extracting PDF pages, Watermarking PDFs, and adding gridlines to PDFs. (Though they're not as good as PDFSuite!) There are also some open source python scripts on [Apple's open source pages](https://opensource.apple.com/source/pyobjc/pyobjc-49/pyobjc/pyobjc-framework-Quartz-2.5.1/Examples/), though some of these no longer work on newer OS versions.
