@@ -6,7 +6,7 @@
 # by Ben Byram-Wigfield
 # Feel free to use, modify and pass on with acknowledgement.
 #
-# Usage: As a script in Automator, or: bookletPDF.py <file1> <file2> ... 
+# Usage: As a script in Automator, or: bookletPDF.py <file1> <file2> ...
 # Original file is preserved, and output file has suffix added.
 # NB: The script will overwrite existing output file of the same name.
 #
@@ -36,7 +36,7 @@ suffix = " booklet.pdf"
 hasSignatures = False
 pagesPerSheet = 4 # Not sure what will happen if this is changed.
 creep = 0.5 # in points. NB: Eventually, the pages will collide.
-imposedOrder = [] 
+imposedOrder = []
 
 # FUNCTIONS
 # Loads in PDF document
@@ -70,7 +70,7 @@ def getRotation(pdfpage):
 		y = Quartz.CGRectGetHeight(mediaBox)
 		if (x > y): displayAngle = -90
 		displayAngle -=  rotValue
-	return displayAngle	
+	return displayAngle
 
 # Gets DocInfo from input file to pass to output.
 # PyObjC returns Keywords in an NSArray; they must be tupled.
@@ -92,9 +92,9 @@ def getDocInfo(file):
 def contextDone(context):
 	if context:
 		Quartz.CGPDFContextClose(context)
-		del context	
+		del context
 
-# MAIN 
+# MAIN
 def makeBooklet(argv):
 
 	leftPage = copy.deepcopy(sheetSize)
@@ -122,7 +122,7 @@ def makeBooklet(argv):
 	totalPages = len(UnsortedOrder)
 
 	if hasSignatures:
-		signatureSize = pagesPerSheet
+		signatureSize = pagesPerSheet * 4
 	else:
 		signatureSize = totalPages
 
@@ -148,15 +148,15 @@ def makeBooklet(argv):
 				Quartz.CGContextDrawPDFPage(writeContext, page)
 				Quartz.CGContextRestoreGState(writeContext)
 			count += 1
-		Quartz.CGContextEndPage(writeContext) 
-		
-		# Set creep for next sheet.		
+		Quartz.CGContextEndPage(writeContext)
+
+		# Set creep for next sheet.
 		if count%4 == 0:
 			leftPage[0][0] += creep
 			rightPage[0][0] -= creep
-			
+
 	# Do tidying up
-	contextDone(writeContext)	
+	contextDone(writeContext)
 
 if __name__ == "__main__":
 	for filename in sys.argv[1:]:
